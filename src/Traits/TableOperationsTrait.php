@@ -2,22 +2,23 @@
 
 namespace Fitatu\Cassandra\Traits;
 
-use Fitatu\Cassandra\QueryBuilder;
-
 /**
  * @author    Sebastian Szczepański
  * @copyright Fitatu Sp. z o.o.
  */
 trait TableOperationsTrait
 {
+    /**
+     * @var null|string
+     */
     protected $primaryKey;
 
     /**
      * @param string $primaryFieldName
      * @param string $type
-     * @return QueryBuilder
+     * @return TableOperationsTrait
      */
-    public function setPrimaryKey(string $primaryFieldName, string $type = 'uuid'): QueryBuilder
+    public function setPrimaryKey(string $primaryFieldName, string $type = 'uuid'): TableOperationsTrait
     {
         $this->query = sprintf(
             $this->query,
@@ -27,7 +28,11 @@ trait TableOperationsTrait
         return $this;
     }
 
-    public function addPrimaryKey($primaryFieldName)
+    /**
+     * @param string $primaryFieldName
+     * @return TableOperationsTrait
+     */
+    public function addPrimaryKey($primaryFieldName): TableOperationsTrait
     {
         $this->primaryKey = "%s, PRIMARY KEY({$primaryFieldName})";
 
@@ -53,9 +58,9 @@ trait TableOperationsTrait
 
     /**
      * @param string[] $fields
-     * @return QueryBuilder
+     * @return TableOperationsTrait
      */
-    public function withFields(array $fields): QueryBuilder
+    public function withFields(array $fields): TableOperationsTrait
     {
         if ($this->primaryKey) {
             $this->query = sprintf(
@@ -85,9 +90,9 @@ trait TableOperationsTrait
 
     /**
      * @param string $tableName
-     * @return QueryBuilder
+     * @return TableOperationsTrait
      */
-    public function addTable(string $tableName): QueryBuilder
+    public function addTable(string $tableName): TableOperationsTrait
     {
         $this->query = "CREATE TABLE {$tableName}(%s)";
 
@@ -96,9 +101,9 @@ trait TableOperationsTrait
 
     /**
      * @param string $tableName
-     * @return QueryBuilder
+     * @return TableOperationsTrait
      */
-    public function alterTable(string $tableName): QueryBuilder
+    public function alterTable(string $tableName): TableOperationsTrait
     {
         $this->query = "ALTER TABLE {$tableName} %s";
 

@@ -1,10 +1,9 @@
 <?php
 
-namespace Fitatu\Cassandra\Traits;
+namespace Fitatu\MediaBundle\Cassandra\Traits;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Collection;
-use Fitatu\Cassandra\QueryBuilder;
 
 /**
  * @author    Sebastian Szczepański
@@ -17,30 +16,32 @@ trait CRUDOperationsTrait
      * @param bool  $timestamp
      * @return string
      */
-    public function create(array $data, bool $timestamp = true): string
+    public function create(array $data, bool $timestamp = true, bool $withPrimaryKey = true): string
     {
         if ($timestamp) {
             $data['updated_at'] = $this->getCurrentTimestamp();
             $data['created_at'] = $this->getCurrentTimestamp();
         }
 
-        if (is_array($data)) {
-            $data = collect($data);
+        if ($withPrimaryKey) {
+            $uuid = $this->getUniquePrimaryKey();
+            $data = ['id' => $uuid] + $data;
         }
+        $data = collect($data);
+
         $keys = $data->keys()->implode(', ');
         $values = $this->prepareDataToSave($data);
-        $uuid = $this->getUniquePrimaryKey();
+
         $this->query = sprintf(
-            "INSERT INTO %s (id, %s) VALUES ('%s', %s)",
+            "INSERT INTO %s (%s) VALUES (%s)",
             $this->tableName,
             $keys,
-            $uuid,
             $values
         );
 
         $this->persist();
 
-        return $uuid;
+        return empty($uuid) ?: $uuid;
     }
 
     /**
@@ -58,7 +59,7 @@ trait CRUDOperationsTrait
     protected function prepareDataToSave(Collection $data): string
     {
         return $data->values()->map(function ($value) {
-            if (is_int($value)) {
+            if (is_int($value) || Uuid::isValid($value)) {
                 return $value;
             }
             return sprintf("'%s'", addslashes($value));
@@ -94,9 +95,9 @@ trait CRUDOperationsTrait
 
     /**
      * @param int $limit
-     * @return QueryBuilder
+     * @return CRUDOperationsTrait
      */
-    public function take(int $limit)
+    public function take(int $limit): CRUDOperationsTrait
     {
         $this->limit = $limit;
 
@@ -115,8 +116,7 @@ trait CRUDOperationsTrait
         if ($criteria) {
             $criteria = "WHERE ".$criteria;
         }
-
-        if ( strpos($criteria, 'AND') !== false ) {
+        if (count($criteria) > 1) {
             $criteria .= " ALLOW FILTERING";
         }
 
@@ -133,7 +133,7 @@ trait CRUDOperationsTrait
             $criteria,
             $limit
         );
-        
+
         return $this->persist();
     }
 
@@ -149,7 +149,7 @@ trait CRUDOperationsTrait
             if (is_integer($value)) {
                 $pattern = "%s=%s ";
             }
-            return sprintf($pattern, $key, addslashes($value));
+            return sprintf($pattern, $key, $value);
         })->implode($connector.' ');
     }
 
