@@ -1,5 +1,4 @@
 <?php
-
 namespace Fitatu\Cassandra;
 
 use Cassandra\SimpleStatement;
