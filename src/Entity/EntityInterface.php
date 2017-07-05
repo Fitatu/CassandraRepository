@@ -1,6 +1,6 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Entity;
+namespace Fitatu\Cassandra\Entity;
 
 /**
  * @author    Sebastian Szczepański

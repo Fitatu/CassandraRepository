@@ -1,6 +1,6 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Entity;
+namespace Fitatu\Cassandra\Entity;
 
 use Doctrine\Common\Util\Inflector;
 use Illuminate\Support\Collection;

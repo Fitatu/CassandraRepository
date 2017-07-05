@@ -1,9 +1,8 @@
 <?php
-
-namespace Fitatu\MediaBundle\Cassandra\Repository;
+namespace Fitatu\Cassandra\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Fitatu\MediaBundle\Cassandra\Entity\EntityInterface;
+use Fitatu\Cassandra\Entity\EntityInterface;
 
 /**
  * @author    Sebastian Szczepański

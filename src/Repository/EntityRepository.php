@@ -1,13 +1,13 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Repository;
+namespace Fitatu\Cassandra\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Collections\ArrayCollection;
-use Fitatu\MediaBundle\Cassandra\Entity\AbstractEntity;
-use Fitatu\MediaBundle\Cassandra\Entity\EntityInterface;
-use Fitatu\MediaBundle\Cassandra\QueryBuilder;
-use Fitatu\MediaBundle\Cassandra\Traits\RelationshipsTrait;
+use Fitatu\Cassandra\Entity\AbstractEntity;
+use Fitatu\Cassandra\Entity\EntityInterface;
+use Fitatu\Cassandra\QueryBuilder;
+use Fitatu\Cassandra\Traits\RelationshipsTrait;
 
 /**
  * @author    Sebastian Szczepański

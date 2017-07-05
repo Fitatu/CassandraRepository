@@ -1,8 +1,8 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Traits;
+namespace Fitatu\Cassandra\Traits;
 
-use Fitatu\MediaBundle\Cassandra\QueryBuilder;
+use Fitatu\Cassandra\QueryBuilder;
 
 /**
  * @author    Sebastian Szczepański

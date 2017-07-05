@@ -1,10 +1,10 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Traits;
+namespace Fitatu\Cassandra\Traits;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Collection;
-use Fitatu\MediaBundle\Cassandra\QueryBuilder;
+use Fitatu\Cassandra\QueryBuilder;
 
 /**
  * @author    Sebastian Szczepański

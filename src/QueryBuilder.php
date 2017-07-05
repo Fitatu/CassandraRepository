@@ -1,11 +1,11 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra;
+namespace Fitatu\Cassandra;
 
 use Cassandra\SimpleStatement;
 use Cassandra\Session as Client;
-use Fitatu\MediaBundle\Cassandra\Traits\TableOperationsTrait;
-use Fitatu\MediaBundle\Cassandra\Traits\CRUDOperationsTrait;
+use Fitatu\Cassandra\Traits\TableOperationsTrait;
+use Fitatu\Cassandra\Traits\CRUDOperationsTrait;
 
 /**
  * @author    Sebastian Szczepański
