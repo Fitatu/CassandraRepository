@@ -17,7 +17,7 @@ abstract class AbstractCassandraSchemaCommand extends Command
     const COMMAND_BASE = 'fitatu:cassandra:';
     const COMMAND = 'schema:create';
 
-    const DESCRIPTION = 'Generate Cassandra Database Schema';
+    const DESCRIPTION = 'Generate Cassandra Database Table Schema';
     const COMMAND_TITLE = '';
 
     /**
@@ -78,7 +78,7 @@ abstract class AbstractCassandraSchemaCommand extends Command
 
             $this->createTable();
 
-            $io->writeln('Database has been created.');
+            $io->writeln('Database table has been created.');
         } catch (\Exception $e) {
             $io->writeln($e->getMessage());
         }
