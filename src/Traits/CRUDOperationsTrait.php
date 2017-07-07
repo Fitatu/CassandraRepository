@@ -1,7 +1,8 @@
 <?php
 
-namespace Fitatu\MediaBundle\Cassandra\Traits;
+namespace Fitatu\Cassandra\Traits;
 
+use Fitatu\Cassandra\QueryBuilder;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Collection;
 
@@ -95,9 +96,9 @@ trait CRUDOperationsTrait
 
     /**
      * @param int $limit
-     * @return CRUDOperationsTrait
+     * @return QueryBuilder
      */
-    public function take(int $limit): CRUDOperationsTrait
+    public function take(int $limit): QueryBuilder
     {
         $this->limit = $limit;
 

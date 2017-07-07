@@ -2,6 +2,8 @@
 
 namespace Fitatu\Cassandra\Traits;
 
+use Fitatu\Cassandra\QueryBuilder;
+
 /**
  * @author    Sebastian Szczepański
  * @copyright Fitatu Sp. z o.o.
@@ -16,9 +18,9 @@ trait TableOperationsTrait
     /**
      * @param string $primaryFieldName
      * @param string $type
-     * @return TableOperationsTrait
+     * @return QueryBuilder
      */
-    public function setPrimaryKey(string $primaryFieldName, string $type = 'uuid'): TableOperationsTrait
+    public function setPrimaryKey(string $primaryFieldName, string $type = 'uuid'): QueryBuilder
     {
         $this->query = sprintf(
             $this->query,
@@ -30,9 +32,9 @@ trait TableOperationsTrait
 
     /**
      * @param string $primaryFieldName
-     * @return TableOperationsTrait
+     * @return QueryBuilder
      */
-    public function addPrimaryKey($primaryFieldName): TableOperationsTrait
+    public function addPrimaryKey($primaryFieldName): QueryBuilder
     {
         $this->primaryKey = "%s, PRIMARY KEY({$primaryFieldName})";
 
@@ -58,9 +60,9 @@ trait TableOperationsTrait
 
     /**
      * @param string[] $fields
-     * @return TableOperationsTrait
+     * @return QueryBuilder
      */
-    public function withFields(array $fields): TableOperationsTrait
+    public function withFields(array $fields): QueryBuilder
     {
         if ($this->primaryKey) {
             $this->query = sprintf(
@@ -90,9 +92,9 @@ trait TableOperationsTrait
 
     /**
      * @param string $tableName
-     * @return TableOperationsTrait
+     * @return QueryBuilder
      */
-    public function addTable(string $tableName): TableOperationsTrait
+    public function addTable(string $tableName): QueryBuilder
     {
         $this->query = "CREATE TABLE {$tableName}(%s)";
 
@@ -101,9 +103,9 @@ trait TableOperationsTrait
 
     /**
      * @param string $tableName
-     * @return TableOperationsTrait
+     * @return QueryBuilder
      */
-    public function alterTable(string $tableName): TableOperationsTrait
+    public function alterTable(string $tableName): QueryBuilder
     {
         $this->query = "ALTER TABLE {$tableName} %s";
 

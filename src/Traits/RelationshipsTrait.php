@@ -43,7 +43,7 @@ trait RelationshipsTrait
             'entity_type'            => $this->getResourceNamespace(stripslashes($entity))
         ]);
         $ids = collect((array)$ids);
-        
+
         $records = [];
 
         $ids->map(function ($row) use ($records) {
