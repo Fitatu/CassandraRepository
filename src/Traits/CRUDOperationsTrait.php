@@ -147,7 +147,7 @@ trait CRUDOperationsTrait
     {
         return collect($data)->map(function ($value, $key) {
             $pattern = "%s='%s' ";
-            if (is_integer($value)) {
+            if (is_int($value) || Uuid::isValid($value)) {
                 $pattern = "%s=%s ";
             }
             return sprintf($pattern, $key, $value);
