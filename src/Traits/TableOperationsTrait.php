@@ -31,11 +31,15 @@ trait TableOperationsTrait
     }
 
     /**
-     * @param string $primaryFieldName
+     * @param string|array $primaryFieldName
      * @return QueryBuilder
      */
     public function addPrimaryKey($primaryFieldName): QueryBuilder
     {
+        if (is_array($primaryFieldName)) {
+            $primaryFieldName = implode(', ', $primaryFieldName);
+        }
+
         $this->primaryKey = "%s, PRIMARY KEY({$primaryFieldName})";
 
         return $this;
