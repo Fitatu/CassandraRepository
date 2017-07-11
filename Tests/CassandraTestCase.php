@@ -6,6 +6,7 @@ use Fitatu\Cassandra\QueryBuilder;
 use M6Web\Bundle\CassandraBundle\Cassandra\Client;
 use Mockery;
 use Mockery\MockInterface;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @author    Sebastian Szczepański

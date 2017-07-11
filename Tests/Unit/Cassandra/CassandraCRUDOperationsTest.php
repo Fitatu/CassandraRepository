@@ -1,9 +1,10 @@
 <?php
 
-namespace Fitatu\MediaBundle\Tests\Unit\Cassandra;
+namespace Fitatu\Cassandra\Tests\Unit\Cassandra;
 
-use Fitatu\MediaBundle\Cassandra\QueryBuilder;
-use Fitatu\MediaBundle\Tests\CassandraTestCase;
+use Fitatu\Cassandra\QueryBuilder;
+use Fitatu\Cassandra\Tests\CassandraTestCase;
+
 
 /**
  * @author    Sebastian Szczepański

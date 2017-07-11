@@ -1,10 +1,8 @@
 <?php
-namespace Fitatu\MediaBundle\Tests\Unit\Cassandra;
+namespace Fitatu\Cassandra\Tests\Unit\Cassandra;
 
-use Cassandra\Rows;
-use Cassandra\SimpleStatement;
-use Fitatu\MediaBundle\Tests\CassandraTestCase;
-use Mockery;
+use Fitatu\Cassandra\QueryBuilder;
+use Fitatu\Cassandra\Tests\CassandraTestCase;
 
 /**
  * @author    Sebastian Szczepański
@@ -49,7 +47,7 @@ class CassandraTableOperationsTest extends CassandraTestCase
             ->withFields(static::TABLE_FIELDS);
         $this->setQuery($query);
         $query = sprintf(
-            "CREATE TABLE %s(id varchar PRIMARY KEY,  %s)",
+            "CREATE TABLE %s(id uuid PRIMARY KEY,  %s)",
             static::TABLE_NAME,
             $this->getImplodedFields()
         );

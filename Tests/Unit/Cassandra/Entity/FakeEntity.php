@@ -1,9 +1,9 @@
 <?php
 
-namespace Fitatu\MediaBundle\Tests\Unit\Cassandra\Entity;
+namespace Fitatu\Cassandra\Tests\Unit\Cassandra\Entity;
 
-use Fitatu\MediaBundle\Cassandra\Entity\AbstractEntity;
-use Fitatu\MediaBundle\Cassandra\Entity\EntityInterface;
+use Fitatu\Cassandra\Entity\AbstractEntity;
+use Fitatu\Cassandra\Entity\EntityInterface;
 
 /**
  * @author    Sebastian Szczepański

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fitatu\MediaBundle\Tests\Cassandra\Repository;
+namespace Fitatu\Cassandra\Tests\Cassandra\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Fitatu\MediaBundle\Cassandra\Entity\EntityInterface;
-use Fitatu\MediaBundle\Cassandra\Repository\EntityRepository;
-use Fitatu\MediaBundle\Tests\CassandraTestCase;
-use Fitatu\MediaBundle\Tests\Unit\Cassandra\Entity\FakeEntity;
+use Fitatu\Cassandra\Entity\EntityInterface;
+use Fitatu\Cassandra\Repository\EntityRepository;
+use Fitatu\Cassandra\Tests\CassandraTestCase;
+use Fitatu\Cassandra\Tests\Unit\Cassandra\Entity\FakeEntity;
 use Mockery;
 
 /**

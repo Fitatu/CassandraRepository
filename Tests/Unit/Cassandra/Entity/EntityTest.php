@@ -2,6 +2,8 @@
 
 namespace Fitatu\MediaBundle\Tests\Unit\Cassandra\Entity;
 
+use Fitatu\Cassandra\Tests\Unit\Cassandra\Entity\FakeEntity;
+
 /**
  * @author    Sebastian Szczepański
  * @copyright Fitatu Sp. z o.o.
