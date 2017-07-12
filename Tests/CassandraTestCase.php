@@ -107,3 +107,4 @@ class CassandraTestCase extends PHPUnit_Framework_TestCase
         return strpos($this->queryString, $string) !== false;
     }
 }
+
