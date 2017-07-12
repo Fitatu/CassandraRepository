@@ -22,7 +22,8 @@
         "doctrine/orm": "^2.5",
         "m6web/cassandra-bundle": "~1.0",
         "ramsey/uuid": "~3.5",
-        "tightenco/collect": "^5.3"
+        "tightenco/collect": "^5.3",
+        "datastax/php-driver": "^1.3"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.8",
