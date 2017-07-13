@@ -1,15 +1,16 @@
 language: php
 sudo: required
-dist: trusty
+dist: xenial
 php:
   - '7.1'
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y php-pear php5-dev
-  - sudo apt-get install -y libcurl3-openssl-dev
-  - sudo pecl channel-update pecl.php.net
-  - sudo pecl install cassandra
+  - sudo git clone https://github.com/datastax/php-driver.git && \
+  - sudo cd php-driver && \
+  - sudo git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256 && \
+  - sudo git submodule update --init && \
+  - sudo cd ext && \
+  - sudo ./install.sh
   - php -m
 
 install:
