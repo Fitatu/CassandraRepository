@@ -5,6 +5,7 @@ php:
   - '7.1'
 
 before_install:
+  - sudo apt-get install -qq libuv-dev
   - git clone https://github.com/datastax/php-driver.git; cd php-driver; git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256; git submodule update --init; cd ext ; ./install.sh; php -m
 
 install:
