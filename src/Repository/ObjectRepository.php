@@ -24,11 +24,11 @@ interface ObjectRepository
 
     /**
      * @param array      $criteria
-     * @param int|null   $limit
+     * @param int   $limit
      *
      * @return ArrayCollection
      */
-    public function findBy(array $criteria, $limit = null): ArrayCollection;
+    public function findBy(array $criteria, $limit = 100): ArrayCollection;
 
     /**
      * @param array $criteria The criteria.

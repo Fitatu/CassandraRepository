@@ -116,12 +116,14 @@ class EntityRepository implements ObjectRepository
 
     /**
      * @param array $criteria
-     * @param null|int  $limit
+     * @param int  $limit
      * @return ArrayCollection
      */
-    public function findBy(array $criteria, $limit = null): ArrayCollection
+    public function findBy(array $criteria, $limit = 100): ArrayCollection
     {
-        return $this->repository()->take($limit)->findBy($criteria);
+        return new ArrayCollection(
+            iterator_to_array($this->repository()->take($limit)->findBy($criteria))
+        );
     }
 
     /**

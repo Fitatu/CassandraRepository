@@ -13,9 +13,9 @@ trait RelationshipsTrait
 {
     /**
      * @param EntityInterface $entity
-     * @param int    $id
-     * @param string $name
-     * @param string $table
+     * @param int             $id
+     * @param string          $name
+     * @param string          $table
      * @return ArrayCollection
      */
     public function morphedByMany($entity, int $id, string $name, string $table): ArrayCollection
@@ -30,7 +30,7 @@ trait RelationshipsTrait
     }
 
     /**
-     * @param string  $entity
+     * @param string $entity
      * @param int    $id
      * @param string $name
      * @param string $table
@@ -39,17 +39,34 @@ trait RelationshipsTrait
     public function morphMany(string $entity, int $id, string $name, string $table): ArrayCollection
     {
         $ids = $this->cassandra->table($table)->findBy([
-            'entity_id' => $id,
-            'entity_type'            => $this->getResourceNamespace(stripslashes($entity))
+            'entity_id'   => $id,
+            'entity_type' => $this->getResourceNamespace($entity)
         ]);
-        $ids = collect((array)$ids);
+        $ids = $this->getRelatedIdsFromIteration($ids, 'media'); //fixme
 
-        $records = [];
-
-        $ids->map(function ($row) use ($records) {
-            $records[] = $this->repository()->find($row->{$name.'_id'});
-        });
+        $records = $this->findBy(['id' => $ids]);
 
         return $this->parseRecords($records);
     }
+
+    /**
+     * @param \Cassandra\Rows $rows
+     * @param string          $name
+     * @return string[]
+     */
+    protected function getRelatedIdsFromIteration($rows, string $name): array
+    {
+        $fieldName = $name.'_id';
+
+        $ids = collect(iterator_to_array($rows))->map(function ($item) use($fieldName) {
+            return $item[$fieldName]->uuid();
+        })->toArray();
+
+        if (!$rows->isLastPage()) {
+            $ids = $ids + $this->getRelatedIdsFromIteration($rows->nextPage(), $name);
+        }
+
+        return $ids;
+    }
+
 }

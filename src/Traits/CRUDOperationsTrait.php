@@ -108,7 +108,7 @@ trait CRUDOperationsTrait
     /**
      * @param array        $criteria
      * @param string|array $fields
-     * @return \Cassandra\Rows;
+     * @return \Cassandra\Rows
      */
     public function findBy(array $criteria, $fields = '*')
     {
@@ -146,11 +146,19 @@ trait CRUDOperationsTrait
     protected function getConditionsFromArray(array $data, string $connector = ','): string
     {
         return collect($data)->map(function ($value, $key) {
+            if (is_array($value)) {
+                return sprintf(
+                    "%s IN(%s)",
+                    $key,
+                    implode(', ', $value)
+                );
+            }
+
             $pattern = "%s='%s' ";
             if (is_int($value) || Uuid::isValid($value)) {
                 $pattern = "%s=%s ";
             }
-            return sprintf($pattern, $key, $value);
+            return sprintf($pattern, $key, addslashes($value));
         })->implode($connector.' ');
     }
 
