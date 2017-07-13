@@ -5,11 +5,11 @@ php:
   - '7.1'
 
 before_install:
-  - sudo git clone https://github.com/datastax/php-driver.git && \
-  - sudo cd php-driver && \
-  - sudo git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256 && \
-  - sudo git submodule update --init && \
-  - sudo cd ext && \
+  - sudo git clone https://github.com/datastax/php-driver.git
+  - sudo cd php-driver
+  - sudo git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256
+  - sudo git submodule update --init
+  - sudo cd ext &&
   - sudo ./install.sh
   - php -m
 
