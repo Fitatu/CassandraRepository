@@ -4,9 +4,8 @@ php:
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y libxml2-dev
-  - sudo apt-get install php-pear php5-dev
-  - sudo apt-get install libcurl3-openssl-dev
+  - sudo apt-get install -y php-pear php5-dev
+  - sudo apt-get install -y libcurl3-openssl-dev
   - sudo pecl install cassandra
 
 install:
