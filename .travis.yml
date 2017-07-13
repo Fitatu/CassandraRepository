@@ -9,7 +9,7 @@ before_install:
   - git clone https://github.com/datastax/php-driver.git; cd php-driver; git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256; git submodule update --init; cd ext ; ./install.sh; 
   - echo "extension=cassandra.so" > /home/travis/.phpenv/versions/7.1.7/etc/conf.d/cassandra.ini
   - cd ~ 
-  - find -type d -name CassandraRepository .
+  - find . -type d -name CassandraRepository
 install:
   - composer install
 
