@@ -3,12 +3,9 @@ php:
   - '7.1'
 
 before_install:
-  - git clone https://github.com/datastax/php-driver.git
-  - cd php-driver
-  - git reset --hard f50c93da3ea73ad8fcf8b181d0313d437e559256
-  - git submodule update --init
-  - cd ext
-  - ./install.sh
+  -  apt-get install php-pear php5-dev
+  - apt-get install libcurl3-openssl-dev
+  - pecl install cassandra
 
 install:
   - composer install
