@@ -18,7 +18,7 @@ trait CRUDOperationsTrait
     protected $order = 'ASC';
 
     /**
-     * @var
+     * @var string
      */
     protected $orderBy;
 
