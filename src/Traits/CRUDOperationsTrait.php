@@ -13,6 +13,21 @@ use Illuminate\Support\Collection;
 trait CRUDOperationsTrait
 {
     /**
+     * @var string
+     */
+    protected $order = 'ASC';
+
+    /**
+     * @var
+     */
+    protected $orderBy;
+
+    /**
+     * @var array
+     */
+    protected $parameters = [];
+
+    /**
      * @param array $data
      * @param bool  $timestamp
      * @return string
@@ -106,6 +121,19 @@ trait CRUDOperationsTrait
     }
 
     /**
+     * @param string $orderBy
+     * @param string $order
+     * @return QueryBuilder
+     */
+    public function orderBy(string $orderBy, $order = 'ASC'): QueryBuilder
+    {
+        $this->orderBy = $orderBy;
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
      * @param array        $criteria
      * @param string|array $fields
      * @return \Cassandra\Rows
@@ -125,17 +153,33 @@ trait CRUDOperationsTrait
             $fields = implode($fields, ", ");
         }
 
-        $limit = $this->limit ? 'LIMIT '.(int)$this->limit : '';
 
         $this->query = sprintf(
             "SELECT %s FROM %s %s %s",
             $fields,
             $this->tableName,
             $criteria,
-            $limit
+            $this->getQueryParameters()
         );
 
         return $this->persist();
+    }
+
+    /**
+     * @return string
+     */
+    public function getQueryParameters(): string
+    {
+        $parameters = [];
+        if ($this->limit) {
+            $parameters[] = 'LIMIT '.(int)$this->limit;
+        }
+
+        if ($this->orderBy) {
+            $parameters[] = 'ORDER BY '.$this->orderBy.' '.$this->order;
+        }
+
+        return implode(" ", $parameters);
     }
 
     /**
@@ -155,7 +199,7 @@ trait CRUDOperationsTrait
             }
 
             $pattern = "%s='%s' ";
-            if (is_int($value) || Uuid::isValid($value)) {
+            if (is_int($value) || Uuid::isValid($value) || is_bool($value)) {
                 $pattern = "%s=%s ";
             }
             return sprintf($pattern, $key, addslashes($value));
