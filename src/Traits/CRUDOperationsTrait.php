@@ -23,11 +23,6 @@ trait CRUDOperationsTrait
     protected $orderBy;
 
     /**
-     * @var array
-     */
-    protected $parameters = [];
-
-    /**
      * @param array $data
      * @param bool  $timestamp
      * @return string
