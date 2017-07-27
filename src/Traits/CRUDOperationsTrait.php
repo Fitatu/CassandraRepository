@@ -75,7 +75,7 @@ trait CRUDOperationsTrait
             }
 
             $value = addslashes($value);
-            if (strpos($value, "\'") !== false) {
+            if (strpos($value, "\\") !== false) {
                 return sprintf('"%s"', $value);
             }
 
