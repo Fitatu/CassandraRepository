@@ -73,7 +73,14 @@ trait CRUDOperationsTrait
             if (is_int($value) || Uuid::isValid($value)) {
                 return $value;
             }
-            return sprintf("'%s'", addslashes($value));
+
+            $value = addslashes($value);
+            if (strpos($value, "\'") !== false) {
+                return sprintf('"%s"', $value);
+            }
+
+            return sprintf("'%s'", $value);
+
         })->implode(', ');
     }
 
