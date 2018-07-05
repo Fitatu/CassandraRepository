@@ -147,7 +147,7 @@ trait CRUDOperationsTrait
         if ($whereQuery) {
             $whereQuery = "WHERE ".$criteria;
         }
-        if (count($whereQuery) > 1) {
+        if (count($criteria) > 1) {
             $whereQuery .= " ALLOW FILTERING";
         }
 
