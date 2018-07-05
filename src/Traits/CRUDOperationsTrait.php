@@ -145,7 +145,7 @@ trait CRUDOperationsTrait
         $whereQuery = $this->getConditionsFromArray($criteria, 'AND');
 
         if ($whereQuery) {
-            $whereQuery = "WHERE ".$criteria;
+            $whereQuery = "WHERE ".$whereQuery;
         }
         if (count($criteria) > 1) {
             $whereQuery .= " ALLOW FILTERING";
