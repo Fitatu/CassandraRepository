@@ -142,13 +142,13 @@ trait CRUDOperationsTrait
      */
     public function findBy(array $criteria, $fields = '*')
     {
-        $criteria = $this->getConditionsFromArray($criteria, 'AND');
+        $whereQuery = $this->getConditionsFromArray($criteria, 'AND');
 
-        if ($criteria) {
-            $criteria = "WHERE ".$criteria;
+        if ($whereQuery) {
+            $whereQuery = "WHERE ".$criteria;
         }
         if (count($criteria) > 1) {
-            $criteria .= " ALLOW FILTERING";
+            $whereQuery .= " ALLOW FILTERING";
         }
 
         if (is_array($fields)) {
@@ -160,7 +160,7 @@ trait CRUDOperationsTrait
             "SELECT %s FROM %s %s %s",
             $fields,
             $this->tableName,
-            $criteria,
+            $whereQuery,
             $this->getQueryParameters()
         );
 
