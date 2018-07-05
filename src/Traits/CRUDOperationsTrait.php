@@ -147,14 +147,14 @@ trait CRUDOperationsTrait
         if ($whereQuery) {
             $whereQuery = "WHERE ".$whereQuery;
         }
-        if (count($criteria) > 1) {
-            $whereQuery .= " ALLOW FILTERING";
-        }
 
         if (is_array($fields)) {
             $fields = implode($fields, ", ");
         }
 
+        if (count($criteria) > 1) {
+            $whereQuery .= " ALLOW FILTERING";
+        }
 
         $this->query = sprintf(
             "SELECT %s FROM %s %s %s",
