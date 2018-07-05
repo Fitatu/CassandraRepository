@@ -142,6 +142,7 @@ trait CRUDOperationsTrait
      */
     public function findBy(array $criteria, $fields = '*')
     {
+        $filtering = "";
         $whereQuery = $this->getConditionsFromArray($criteria, 'AND');
 
         if ($whereQuery) {
@@ -153,15 +154,16 @@ trait CRUDOperationsTrait
         }
 
         if (count($criteria) > 1) {
-            $whereQuery .= " ALLOW FILTERING";
+            $filtering = " ALLOW FILTERING";
         }
 
         $this->query = sprintf(
-            "SELECT %s FROM %s %s %s",
+            "SELECT %s FROM %s %s %s%s",
             $fields,
             $this->tableName,
             $whereQuery,
-            $this->getQueryParameters()
+            $this->getQueryParameters(),
+            $filtering
         );
 
         return $this->persist();
